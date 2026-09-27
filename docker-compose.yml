@@ -1,0 +1,7 @@
+services:
+  vibedelib-web:
+    build: .
+    container_name: vibedelib-web
+    restart: always
+    ports:
+      - "8090:80"   # à adapter : port libre sur l'hôte, ou à retirer si un reverse-proxy publie le conteneur directement
