@@ -3,18 +3,5 @@ services:
     build: .
     container_name: vibedelib-web
     restart: always
-    networks:
-      - npm_proxy
-    # Si Nginx Proxy Manager tourne AILLEURS que dans Docker (LXC/VM à part,
-    # appliance dédiée), remplace le bloc "networks" ci-dessus par un port
-    # publié, et vise <IP_de_cet_hôte>:8090 dans NPM :
-    # ports:
-    #   - "8090:80"
-
-networks:
-  # Réseau Docker partagé avec Nginx Proxy Manager, pour que NPM joigne le
-  # conteneur par son nom sans exposer de port sur l'hôte. Si NPM tourne dans
-  # sa propre stack Compose, réutilise SON réseau : remplace "npm_proxy" par
-  # le nom réel (docker network ls | grep npm), en gardant "external: true".
-  npm_proxy:
-    external: true
+    ports:
+      - "8090:80"   # NPM forward vers l'IP de cet hôte sur ce port
